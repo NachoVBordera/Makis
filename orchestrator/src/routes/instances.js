@@ -66,10 +66,9 @@ router.delete("/:schema", async (req, res) => {
   try {
     await client.query("BEGIN");
     await client.query(`DROP SCHEMA IF EXISTS ${schema} CASCADE;`);
-    await client.query(
-      `UPDATE core.instances SET estado='deleted', deleted_at=NOW() WHERE schema_name=$1;`,
-      [schema]
-    );
+    await client.query(`DELETE FROM core.instances WHERE schema_name=$1;`, [
+      schema,
+    ]);
     await client.query("COMMIT");
     res.json({ ok: true, deleted: schema });
   } catch (err) {
