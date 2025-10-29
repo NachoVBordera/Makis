@@ -48,6 +48,17 @@ router.post("/create", async (req, res) => {
     await client.query("COMMIT");
     res.json({ ok: true, schema: schemaName });
     console.log("Esquema creado");
+
+    const mensageResponse = `‼☢️App INICIADA, codigo ${name} - Borra ese mensaje de tu movil para mayor seguridad. En unos minutos podras descargarla`;
+    fetch(`${process.env.SIGNAL_API_URL}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: mensageResponse,
+        number: process.env.SIGNAL_NUMBER_PREFIX,
+        recipients: [process.env.SIGNAL_ID_GROUP],
+      }),
+    }).then((response) => response.json());
   } catch (err) {
     await client.query("ROLLBACK");
     console.error("❌ Error creando schema:", err);
@@ -71,6 +82,16 @@ router.delete("/:schema", async (req, res) => {
     ]);
     await client.query("COMMIT");
     res.json({ ok: true, deleted: schema });
+    const mensageResponse = `⭕App ELIMINADA. Borra ea APK do teu movil para mayor seguridade.`;
+    fetch(`${process.env.SIGNAL_API_URL}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: mensageResponse,
+        number: process.env.SIGNAL_NUMBER_PREFIX,
+        recipients: [process.env.SIGNAL_ID_GROUP],
+      }),
+    }).then((response) => response.json());
   } catch (err) {
     await client.query("ROLLBACK");
     console.error("❌ Error borrando schema:", err);
