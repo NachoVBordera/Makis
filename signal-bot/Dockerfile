@@ -3,7 +3,7 @@ FROM bbernhard/signal-cli-rest-api:latest
 
 # Establece variables de entorno por defecto
 ENV MODE=native \
-    AUTO_RECEIVE_SCHEDULE=0 * * * * \
+    AUTO_RECEIVE_SCHEDULE="0 * * * *" \
     TZ=Europe/Madrid
 
 # Crea directorio persistente para los datos de Signal
