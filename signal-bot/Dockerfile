@@ -1,8 +1,8 @@
 # Imagen base oficial del proyecto
 FROM bbernhard/signal-cli-rest-api:latest
 
-# Establece variables de entorno por defecto
-ENV MODE=native \
+# Variables de entorno por defecto
+ENV MODE=json-rpc \
     AUTO_RECEIVE_SCHEDULE="0 * * * *" \
     TZ=Europe/Madrid
 
