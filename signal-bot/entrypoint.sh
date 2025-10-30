@@ -15,8 +15,5 @@ echo "💡 URL para registrar tu móvil Signal:"
 echo "https://$HOST/v1/register"
 echo "----------------------------------------"
 
-# Ejecuta Signal CLI REST API en modo json-rpc en background
-signal-cli-rest-api -signal-cli-config="$CONFIG_DIR" -mode json-rpc &
-
-# Mantener el contenedor vivo para Railway
-tail -f /dev/null
+# Ejecuta Signal CLI REST API en foreground
+exec signal-cli-rest-api -signal-cli-config="$CONFIG_DIR"
