@@ -9,9 +9,6 @@ ENV MODE=native \
 # Crea directorio persistente para los datos de Signal
 RUN mkdir -p /home/.local/share/signal-cli
 
-# Punto de montaje del volumen
-VOLUME ["/home/.local/share/signal-cli"]
-
 # Expone el puerto del API
 EXPOSE 8080
 
