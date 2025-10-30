@@ -2,8 +2,7 @@
 FROM bbernhard/signal-cli-rest-api:latest
 
 # Variables de entorno por defecto
-ENV MODE=json-rpc \
-    AUTO_RECEIVE_SCHEDULE="0 * * * *" \
+ENV AUTO_RECEIVE_SCHEDULE="0 * * * *" \
     TZ=Europe/Madrid
 
 # Crea directorio persistente para los datos de Signal
